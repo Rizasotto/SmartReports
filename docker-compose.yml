@@ -1,0 +1,19 @@
+services:
+  smartreports-web:
+    build: .
+    container_name: smartreports-web
+    ports:
+      - "5174:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_SMARTCIVI_API_URL=http://localhost:8000/api
+      - VITE_NOTIFY_API_URL=http://localhost:4000
+
+  smartreports-api:
+    build: ./server
+    container_name: smartreports-api
+    ports:
+      - "4000:4000"
+    env_file: .env
